@@ -1,0 +1,53 @@
+@startuml
+
+Class Application
+class TodoListApplication {
+    +start(Stage primaryStage)
+    +main(String[] args)
+}
+Object Items {
+    +Items (String desc, String date, CheckBox completed)
+
+    +String getDesc
+    +String getDate
+    +Boolean getCompleted
+    +setDesc(String desc)
+    +setDate(String date)
+    +setCompleted(Boolean completed)
+}
+class FXMLController {
+    -ToggleGroup group;
+    -RadioButton allV;
+    -RadioButton completedV;
+    -RadioButton inCompletedV;
+    -TableColumn<Items, String> desc;
+    -TableColumn<Items, String> date;
+    -TableColumn<Items, Boolean> completed;
+    -TableView<Items> tableList;
+    -TextField descriptionBox;
+    -DatePicker dueDatePicker;
+     ObservableList<Items> list = FXCollections.observableArrayList();
+     ObservableList<Items> compList = FXCollections.observableArrayList();
+     ObservableList<Items> inCompList = FXCollections.observableArrayList();
+     +void addTextFields(ActionEvent event)
+     +String dateToString(DatePicker dueDatePicker)
+     +Boolean validateItems(TextField descriptionBox)
+     +void addItems(TextField descriptionBox, String dueDatePicker)
+     +void removeSelectedList(ActionEvent event)
+     +void clearList(ActionEvent event)
+     +void initialize()
+     +void saveList(ActionEvent event)
+     +void saveTextToFile(File file)
+     +void openList(ActionEvent event)
+     +void openFiletoText(File file)
+     +void closeList(ActionEvent event)
+     +void editDesc(TableColumn.CellEditEvent<Items, String> itemsStringCellEditEvent)
+     +Boolean validateEditItems(String toString)
+     +void editDate(TableColumn.CellEditEvent<Items, String> itemsStringCellEditEvent)
+     +Boolean validateEditDate(String toString)
+
+}
+
+Application <|-- TodoListApplication
+FXMLController o-- Items
+@enduml
